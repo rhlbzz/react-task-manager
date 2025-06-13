@@ -5,11 +5,11 @@ interface TaskPageProps {
 }
 
 export default async function TaskPage({ params }: TaskPageProps) {
-  const { id } = params;
+  const { id } = await params;
   
   return (
-  <>
-    <TaskItem id={id} />
-  </>
+    <>
+      <TaskItem id={id} />
+    </>
   );
 }
