@@ -6,6 +6,7 @@ import CtaComponent from "../ui/CtaComponent";
 import { useModal } from "../modal/ModalComponent";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { updateTask } from "../../store/taskSlice";
+import { Status } from "@/src/types";
 
 interface EditTaskProps {
    id: string
@@ -18,11 +19,13 @@ const EditTask: React.FC<EditTaskProps> = ({ id }) => {
   const task = tasks.find(t => t.id === id);
   const [title, setTitle] = useState(task?.title || '');
   const [description, setDescription] = useState(task?.description || '');
+  const [status, setStatus] = useState(task?.status || '');
 
   useEffect(() => {
     if (task) {
       setTitle(task.title);
       setDescription(task.description);
+      setStatus(task.status);
     }
   }, [task]);
 
@@ -32,7 +35,8 @@ const EditTask: React.FC<EditTaskProps> = ({ id }) => {
     const updatedTask: Task = {
       ...task,
       title,
-      description
+      description,
+      status
     };
     dispatch(updateTask(updatedTask));
     close();
@@ -64,6 +68,19 @@ const EditTask: React.FC<EditTaskProps> = ({ id }) => {
             value={description}
             onChange={(e) => (setDescription(e.target.value))}
           ></textarea>
+        </div>
+        <div>
+          <label htmlFor="status" className="block text-sm font-medium text-gray-700">Status</label>
+          <select 
+            id="status" 
+            name="status" 
+            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
+            value={status}
+            onChange={(e) => (setStatus(e.target.value))}
+          >
+            <option value={Status.OPEN}>Open</option>
+            <option value={Status.DONE}>Done</option>
+          </select>
         </div>
         <CtaComponent
           text="Confirm" 
