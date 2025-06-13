@@ -8,6 +8,5 @@ export interface Task {
   id: string;
   title: string;
   description: string;
-  status: Status;
-  createdAt: string;
+  status: Status.OPEN | Status.DONE | Status.CLOSE;
 } 

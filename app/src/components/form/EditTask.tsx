@@ -18,7 +18,7 @@ const EditTask: React.FC<EditTaskProps> = ({ id }) => {
   const task = tasks.find(t => t.id === id);
   const [title, setTitle] = useState(task?.title || '');
   const [description, setDescription] = useState(task?.description || '');
-  const [status, setStatus] = useState(task?.status || '');
+  const [status, setStatus] = useState<Status>(task?.status || Status.OPEN);
 
   useEffect(() => {
     if (task) {
@@ -75,7 +75,7 @@ const EditTask: React.FC<EditTaskProps> = ({ id }) => {
             name="status" 
             className="mt-1 block w-full border-gray-300 rounded-md shadow-sm"
             value={status}
-            onChange={(e) => (setStatus(e.target.value))}
+            onChange={(e) => (setStatus(e.target.value as Status))}
           >
             <option value={Status.OPEN}>Open</option>
             <option value={Status.DONE}>Done</option>
