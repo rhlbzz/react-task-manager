@@ -6,6 +6,7 @@ interface TaskPageProps {
 
 export default async function TaskPage({ params }: TaskPageProps) {
   const { id } = params;
+  
   return (
   <>
     <TaskItem id={id} />
