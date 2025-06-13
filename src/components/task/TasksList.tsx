@@ -4,7 +4,8 @@ import React from 'react';
 import StatusComponent from '../ui/StatusComponent';
 import CtaComponent from '../ui/CtaComponent';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
-import { deleteTask } from '../../store/taskSlice';
+import { deleteTask, updateTask } from '../../store/taskSlice';
+import { Task, Status } from '@/src/types';
 
 const TasksList: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -12,7 +13,16 @@ const TasksList: React.FC = () => {
 
   const handleCloseTask = (id: string) => {
     dispatch(deleteTask(id));
-    localStorage.setItem('tasks', JSON.stringify(tasks.filter(task => task.id !== id)));
+  };
+
+  const handleCompleteTask = (id: string) => {
+    const task = tasks.find(t => t.id === id);
+    if (!task) return;
+    const updatedTask: Task = {
+      ...task,
+      status: Status.DONE
+    };
+    dispatch(updateTask(updatedTask));
   };
 
   return (
@@ -31,8 +41,11 @@ const TasksList: React.FC = () => {
               <StatusComponent status={task.status} />
             </div>
             <div className="col-span-1 py-1 text-right">
-              <CtaComponent text="View" className="mx-auto mr-1" variant="tertiary" href={`task/${task.id}`} />
-              <CtaComponent text="Complete" className="mx-auto ml-1" variant="secondary" onClickCallback={() => (handleCloseTask(task.id))}/>
+              <div className={`grid gap-2 ${task.status === Status.DONE ? 'grid-cols-2' : 'grid-cols-3'}`}>
+                 { task.status === Status.OPEN && <CtaComponent text="Complete" className="mx-auto mr-1" variant="primary" onClickCallback={() => (handleCompleteTask(task.id))}/> }
+                <CtaComponent text="View" className="mx-auto" variant="tertiary" href={`task/${task.id}`} />
+                <CtaComponent text="Close" className="mx-auto" variant="secondary" onClickCallback={() => (handleCloseTask(task.id))}/>
+              </div>
             </div>
           </React.Fragment>
         ))

@@ -1,6 +1,7 @@
 @use '../variables' as *;
 
 .open,
+.done,
 .close {
   color: $c-white;
   font-size: 20px;
@@ -11,10 +12,15 @@
   text-transform: uppercase;
 }
 
-
 .open {
   background-color: rgba($c-yellow, 0.8);
   border: 1px solid $c-yellow;
+}
+
+
+.done {
+  background-color: rgba($c-green, 0.8);
+  border: 1px solid $c-green;
 }
 
 .close {
