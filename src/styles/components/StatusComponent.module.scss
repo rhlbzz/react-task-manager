@@ -1,0 +1,30 @@
+@use '../variables' as *;
+
+.backlog,
+.todo,
+.progress,
+.done {
+  color: $c-white;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 4px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.backlog {
+  background-color: rgba($c-purple, 0.8);
+}
+
+.todo {
+  background-color: rgba($c-yellow, 0.8);
+}
+
+.progress {
+  background-color: rgba($c-green, 0.8);
+}
+
+.done {
+  background-color: rgba($c-red, 0.8);
+}
