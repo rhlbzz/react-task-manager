@@ -4,19 +4,26 @@
 import React, { useEffect, useState }  from 'react';
 import StatusComponent from '../ui/StatusComponent';
 import CtaComponent from '../ui/CtaComponent';
+import { Task } from '@/types';
 
 
 const TasksList: React.FC = () => {
   
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState<Task[] | undefined>(undefined);
 
    useEffect(() => {
-    // Questo codice gira solo nel client (dopo il mount)
     const stored = localStorage.getItem('tasks');
     if (stored) {
       setTasks(JSON.parse(stored));
     }
   }, []);
+
+  const handleCloseTask = (id: string) => {
+    if (!tasks) return;
+    const updatedTasks = tasks.filter((task) => task.id !== id);
+    setTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  };
 
   return (
     tasks && tasks.length !== 0 ? (
@@ -35,7 +42,7 @@ const TasksList: React.FC = () => {
             </div>
             <div className="col-span-1 py-1 text-right">
               <CtaComponent text="View" className="mx-auto mr-1" variant="tertiary" href={`task/${task.id}`} />
-              <CtaComponent text="Close" className="mx-auto ml-1" variant="secondary"/>
+              <CtaComponent text="Complete" className="mx-auto ml-1" variant="secondary" onClickCallback={() => (handleCloseTask(task.id))}/>
             </div>
           </React.Fragment>
         ))
