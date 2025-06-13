@@ -48,3 +48,13 @@ A simple task management application built with Next.js, Redux, and TypeScript. 
 - **Edit a Task**: Click on "View" for a task, then "Edit" to modify it.
 - **Delete a Task**: Click on "Close" to remove a task.
 - **Complete a Task**: Click on "Complete" to mark a task as done.
+
+
+### Unit Test
+
+Run the test command:
+```bash
+npm test
+# or
+yarn test
+```
