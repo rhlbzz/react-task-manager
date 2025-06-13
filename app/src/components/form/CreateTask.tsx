@@ -4,7 +4,7 @@ import CtaComponent from '../ui/CtaComponent';
 import { useRouter } from 'next/navigation';
 import { useAppDispatch } from '../../store/hooks';
 import { addTask } from '../../store/taskSlice';
-import { Task, Status } from '../../types';
+import { Task, Status } from './../../types';
 
 const CreateTask: React.FC = () => {
   const [title, setTitle] = useState('');

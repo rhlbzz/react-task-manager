@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useAppDispatch } from '../store/hooks';
 import { setTasks } from '../store/taskSlice';
-import { Task } from '../../types';
+import { Task } from '../types';
 
 export default function TaskInitializer() {
   const dispatch = useAppDispatch();
