@@ -28,29 +28,51 @@ const TasksList: React.FC = () => {
   return (
     tasks && tasks.length !== 0 ? (
     <>
-    <h1 className="font-bold text-2xl">Tasks</h1>
+    <h1 className="font-bold text-3xl">Yout tasks:</h1>
     <hr />
-    <div className='grid grid-cols-3'>
-      {
-        tasks.map((task) => (
-          <React.Fragment key={task.id}>
-            <div className="col-span-1 py-1 flex items-center">
-              <p className='p1'>{task.title}</p>
-            </div>
-            <div className="col-span-1 py-1 text-center">
+    <table className="min-w-full table-auto border border-gray-300">
+      <thead className="bg-gray-100">
+        <tr>
+          <th className="text-left px-4 py-2 border-b border-gray-300 w-[50%]">Title</th>
+          <th className="text-left px-4 py-2 border-b border-gray-300 whitespace-nowrap w-[20%]">Status</th>
+          <th className="text-left px-4 py-2 border-b border-gray-300 whitespace-nowrap w-[30%]">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {tasks.map(task => (
+          <tr key={task.id} className="border-t border-gray-200">
+            <td className="px-4 py-2">{task.title}</td>
+            <td className="px-4 py-2">
               <StatusComponent status={task.status} />
-            </div>
-            <div className="col-span-1 py-1 text-right">
-              <div className={`grid gap-2 ${task.status === Status.DONE ? 'grid-cols-2' : 'grid-cols-3'}`}>
-                 { task.status === Status.OPEN && <CtaComponent text="Complete" className="mx-auto mr-1" variant="primary" onClickCallback={() => (handleCompleteTask(task.id))}/> }
-                <CtaComponent text="View" className="mx-auto" variant="tertiary" href={`task/${task.id}`} />
-                <CtaComponent text="Close" className="mx-auto" variant="secondary" onClickCallback={() => (handleCloseTask(task.id))}/>
+            </td>
+            <td className="px-4 py-2">
+              <div className="flex flex-wrap gap-2">
+                {task.status === Status.OPEN && (
+                  <CtaComponent
+                    text="Complete"
+                    className="text-sm"
+                    variant="primary"
+                    onClickCallback={() => handleCompleteTask(task.id)}
+                  />
+                )}
+                <CtaComponent
+                  text="View"
+                  className="text-sm"
+                  variant="tertiary"
+                  href={`task/${task.id}`}
+                />
+                <CtaComponent
+                  text="Close"
+                  className="text-sm"
+                  variant="secondary"
+                  onClickCallback={() => handleCloseTask(task.id)}
+                />
               </div>
-            </div>
-          </React.Fragment>
-        ))
-      }
-    </div>
+            </td>
+          </tr>
+          ))}
+        </tbody>
+      </table>
     </>
     ) : (<></>)
   );

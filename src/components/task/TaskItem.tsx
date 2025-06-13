@@ -22,22 +22,21 @@ const TaskItem: React.FC<TaskItemProps> = ({ id }) => {
       {
       task ? (
         <div className="space-y-4">
+          <h1 className="text-4xl">Task Details</h1>
+          <hr />
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl font-bold">{task.title}</h1>
+            <h1 className="text-3xl"><span className="italic">Title:</span> <span className="font-bold">{task.title}</span></h1>
             <StatusComponent status={task.status}/>
           </div>
-          <p className="text-gray-700">{task.description}</p>
-          {
-            task.status === Status.OPEN && (
-              <CtaComponent
-                text="Edit" 
-                variant="tertiary" 
-                className="mt-4"
-                onClickCallback={()=> (open(
-                  <EditTask id={task.id} />
-                ))}
-              />)           
-          }
+          <p className="text-gray-700"><span className="italic">Description</span>: {task.description}</p>
+          <CtaComponent
+            text="Edit" 
+            variant="tertiary" 
+            className="mt-4"
+            onClickCallback={()=> (open(
+              <EditTask id={task.id} />
+            ))}
+          />       
         </div>
       ) : (
         <h1 className="text-3xl text-center">
