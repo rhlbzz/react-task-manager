@@ -27,15 +27,15 @@ const ListComponent: React.FC = () => {
       {
         tasks.map((task) => (
           <React.Fragment key={task.id}>
-            <div className="col-span-1">
-              <p className='text-md'>{task.title}</p>
+            <div className="col-span-1 py-1 flex items-center">
+              <p className='p1'>{task.title}</p>
             </div>
-            <div className="col-span-1 text-center">
+            <div className="col-span-1 py-1 text-center">
               <StatusComponent status={task.status} />
             </div>
-            <div className="col-span-1">
-              <CtaComponent text="Edit" className="mx-auto p-2" variant="tertiary"/>
-              <CtaComponent text="Close" className="mx-auto p-2" variant="secondary"/>
+            <div className="col-span-1 py-1 text-right">
+              <CtaComponent text="Edit" className="mx-auto mr-1" variant="tertiary"/>
+              <CtaComponent text="Close" className="mx-auto ml-1" variant="secondary"/>
             </div>
           </React.Fragment>
         ))
