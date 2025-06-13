@@ -1,14 +1,18 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import CtaComponent from '../ui/CtaComponent';
-import { Status } from '@/contants';
 import { useRouter } from 'next/navigation';
+import { useAppDispatch } from '../../store/hooks';
+import { addTask } from '../../store/taskSlice';
+import { Task } from '../../types';
+import { Status } from '@/contants';
 
-const CreateTaks: React.FC = () => {
+const CreateTask: React.FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setIsClient(true);
@@ -17,15 +21,13 @@ const CreateTaks: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!isClient) return;
-    const storedTasks = JSON.parse(localStorage.getItem('tasks') || '[]');
-    const newTask = {
-      id: `task-${storedTasks.length + 1}`,
+    const newTask: Task = {
+      id: `task-${Date.now()}`,
       title,
       description,
       status: Status.OPEN
     };
-    const updatedTasks = [...storedTasks, newTask];
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    dispatch(addTask(newTask));
     setTitle(''); 
     setDescription('');
     router.push('/');
@@ -69,4 +71,4 @@ const CreateTaks: React.FC = () => {
     </form>
   );
 };
-export default CreateTaks;
+export default CreateTask;

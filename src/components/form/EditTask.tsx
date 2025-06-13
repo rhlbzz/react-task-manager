@@ -4,43 +4,39 @@ import { Task } from "@/types";
 import { useEffect, useState } from "react";
 import CtaComponent from "../ui/CtaComponent";
 import { useModal } from "../modal/ModalComponent";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { updateTask } from "../../store/taskSlice";
 
 interface EditTaskProps {
    id: string
 }
+
 const EditTask: React.FC<EditTaskProps> = ({ id }) => {
   const { close } = useModal();
-  const [tasks, setTasks] = useState<Task[] | undefined>(undefined);
-  const [task, setTask] = useState<Task | undefined>(undefined);
+  const dispatch = useAppDispatch();
+  const tasks = useAppSelector(state => state.tasks.tasks);
+  const task = tasks.find(t => t.id === id);
   const [title, setTitle] = useState(task?.title || '');
   const [description, setDescription] = useState(task?.description || '');
 
-  
   useEffect(() => {
-    const stored = localStorage.getItem('tasks');
-    if (!stored) return;
-    setTasks(JSON.parse(stored));
-    if (!tasks) return;
-    setTask(tasks.find((task: Task) => task.id === id));
-    if (!task) return;
-    setTitle(task.title);
-    setDescription(task.description);
-  }, [id]);
+    if (task) {
+      setTitle(task.title);
+      setDescription(task.description);
+    }
+  }, [task]);
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      if (!tasks) return
-      const updatedTasks = tasks.map((t) => {
-        if (t.id === id) {
-          return { ...t, title, description };
-        }
-        return t;
-      });
-      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-      // Dispatch custom event to notify other components
-      window.dispatchEvent(new CustomEvent('taskUpdated'));
-      close();
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!task) return;
+    const updatedTask: Task = {
+      ...task,
+      title,
+      description
     };
+    dispatch(updateTask(updatedTask));
+    close();
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -73,11 +69,11 @@ const EditTask: React.FC<EditTaskProps> = ({ id }) => {
           text="Confirm" 
           variant="primary" 
           className="mt-4"
+          action='submit'
         />
       </form>
     </div>
   );
-
 };
 
 export default EditTask;

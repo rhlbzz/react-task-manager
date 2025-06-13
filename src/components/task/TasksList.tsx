@@ -1,28 +1,18 @@
-
 'use client';
 
-import React, { useEffect, useState }  from 'react';
+import React from 'react';
 import StatusComponent from '../ui/StatusComponent';
 import CtaComponent from '../ui/CtaComponent';
-import { Task } from '@/types';
-
+import { useAppDispatch, useAppSelector } from '../../store/hooks';
+import { deleteTask } from '../../store/taskSlice';
 
 const TasksList: React.FC = () => {
-  
-  const [tasks, setTasks] = useState<Task[] | undefined>(undefined);
-
-   useEffect(() => {
-    const stored = localStorage.getItem('tasks');
-    if (stored) {
-      setTasks(JSON.parse(stored));
-    }
-  }, []);
+  const dispatch = useAppDispatch();
+  const tasks = useAppSelector(state => state.tasks.tasks);
 
   const handleCloseTask = (id: string) => {
-    if (!tasks) return;
-    const updatedTasks = tasks.filter((task) => task.id !== id);
-    setTasks(updatedTasks);
-    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+    dispatch(deleteTask(id));
+    localStorage.setItem('tasks', JSON.stringify(tasks.filter(task => task.id !== id)));
   };
 
   return (
@@ -52,4 +42,5 @@ const TasksList: React.FC = () => {
     ) : (<></>)
   );
 };
+
 export default TasksList;

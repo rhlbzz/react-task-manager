@@ -26,7 +26,7 @@ const CtaComponent: React.FC<CtaComponentProps> = ({ text, variant = 'primary', 
   <button 
     onClick={handleClick} 
     className={`pointer-events-auto hover:cursor-pointer ${className} ${styles[variant.toLowerCase()]}`}
-    type={action ? 'button' : 'submit'}
+    type={action === 'submit' && !href && !onClickCallback ? 'submit' : 'button'}
   >{text}</button>
   );
 };
