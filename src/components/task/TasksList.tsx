@@ -28,7 +28,7 @@ const TasksList: React.FC = () => {
   return (
     tasks && tasks.length !== 0 ? (
     <>
-    <h1 className="font-bold text-3xl">Yout tasks:</h1>
+    <h1 className="font-bold text-2xl mb-2">Your tasks:</h1>
     <hr />
     <table className="min-w-full table-auto border border-gray-300">
       <thead className="bg-gray-100">
