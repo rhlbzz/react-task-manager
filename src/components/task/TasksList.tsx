@@ -6,7 +6,7 @@ import StatusComponent from '../ui/StatusComponent';
 import CtaComponent from '../ui/CtaComponent';
 
 
-const ListComponent: React.FC = () => {
+const TasksList: React.FC = () => {
   
   const [tasks, setTasks] = useState([]);
 
@@ -34,7 +34,7 @@ const ListComponent: React.FC = () => {
               <StatusComponent status={task.status} />
             </div>
             <div className="col-span-1 py-1 text-right">
-              <CtaComponent text="Edit" className="mx-auto mr-1" variant="tertiary"/>
+              <CtaComponent text="View" className="mx-auto mr-1" variant="tertiary" href={`task/${task.id}`} />
               <CtaComponent text="Close" className="mx-auto ml-1" variant="secondary"/>
             </div>
           </React.Fragment>
@@ -45,4 +45,4 @@ const ListComponent: React.FC = () => {
     ) : (<></>)
   );
 };
-export default ListComponent;
+export default TasksList;

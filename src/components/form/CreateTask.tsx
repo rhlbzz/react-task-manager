@@ -1,12 +1,13 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import CtaComponent from '../ui/CtaComponent';
-import { Status } from '@/contants';
+import { Status, StatusValue } from '@/contants';
 import { useRouter } from 'next/navigation';
 
 const CreateTaks: React.FC = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [status, setStatus] = useState(Status.BACKLOG);
   const [isClient, setIsClient] = useState(false);
   const router = useRouter();
 
@@ -22,11 +23,11 @@ const CreateTaks: React.FC = () => {
       id: `task-${storedTasks.length + 1}`,
       title,
       description,
-      status: Status.BACKLOG,
+      status
     };
     const updatedTasks = [...storedTasks, newTask];
     localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-    setTitle('');
+    setTitle(''); 
     setDescription('');
     console.log('Task created:', newTask);
     router.push('/');
@@ -59,6 +60,16 @@ const CreateTaks: React.FC = () => {
           value={description}
           onChange={(e) => (setDescription(e.target.value))}
         ></textarea>
+      </div>
+      <div>
+        <label htmlFor="status" className="block text-sm font-medium text-gray-700">Status</label>
+       <select id="status" name="status" className="mt-1 block w-full border-gray-300 rounded-md shadow-sm" onChange={(e) => (setStatus(e.target.value))} value={status}>
+          <option value="" disabled>Select a status</option>
+          <option value={Status.BACKLOG}>{StatusValue.BACKLOG}</option>
+          <option value={Status.TODO}>{StatusValue.TODO}</option>
+          <option value={Status.IN_PROGRESS}>{StatusValue.IN_PROGRESS}</option>
+          <option value={Status.DONE}>{StatusValue.DONE}</option>
+        </select>
       </div>
       <div>
         <CtaComponent

@@ -1,4 +1,4 @@
-import ListComponent from "../../src/components/list/ListComponent";
+import TasksList from "../../src/components/task/TasksList";
 import CtaComponent from "../../src/components/ui/CtaComponent";
 
 
@@ -13,7 +13,7 @@ export default function Home() {
         href="/create-task"
       />
       </div>
-      <ListComponent />
+      <TasksList />
     </div>
   );
 }
