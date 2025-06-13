@@ -1,6 +1,6 @@
 'use client';
 
-import CreateTaskForm from '@/src/components/form/CreateTask';
+import CreateTaskForm from '../components/form/CreateTaskForm';
 import React from 'react';
 
 export default function CreateTask() {

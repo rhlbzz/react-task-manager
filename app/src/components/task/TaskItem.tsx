@@ -1,12 +1,11 @@
 'use client';
 
-import { Task } from "@/types";
 import StatusComponent from "../ui/StatusComponent";
 import CtaComponent from "../ui/CtaComponent";
 import { useModal } from "../modal/ModalComponent";
 import EditTask from "../form/EditTask";
 import { useAppSelector } from "../../store/hooks";
-import { Status } from "@/src/types";
+import { Status, Task } from "../../types";
 
 interface TaskItemProps {
    id: string

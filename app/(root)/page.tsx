@@ -1,5 +1,5 @@
-import TasksList from "../../src/components/task/TasksList";
-import CtaComponent from "../../src/components/ui/CtaComponent";
+import TasksList from "../src/components/task/TasksList";
+import CtaComponent from "../src/components/ui/CtaComponent";
 
 
 export default function Home() {

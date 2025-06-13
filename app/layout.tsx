@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import '../src/styles/_globals.scss';
-import HeaderComponent from "../src/components/ui/HeaderComponent";
-import { ModalProvider } from "../src/components/modal/ModalComponent";
+import './src/styles/_globals.scss';
+import HeaderComponent from "./src/components/ui/HeaderComponent";
+import { ModalProvider } from "./src/components/modal/ModalComponent";
 import { Providers } from "./providers";
-import TaskInitializer from "../src/components/TaskInitializer";
+import TaskInitializer from "./src/components/TaskInitializer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

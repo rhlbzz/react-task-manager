@@ -1,12 +1,11 @@
 'use client';
 
-import { Task } from "@/types";
 import { useEffect, useState } from "react";
 import CtaComponent from "../ui/CtaComponent";
 import { useModal } from "../modal/ModalComponent";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { updateTask } from "../../store/taskSlice";
-import { Status } from "@/src/types";
+import { Status, Task } from "../../types";
 
 interface EditTaskProps {
    id: string

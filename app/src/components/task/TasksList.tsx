@@ -5,7 +5,7 @@ import StatusComponent from '../ui/StatusComponent';
 import CtaComponent from '../ui/CtaComponent';
 import { useAppDispatch, useAppSelector } from '../../store/hooks';
 import { deleteTask, updateTask } from '../../store/taskSlice';
-import { Task, Status } from '@/src/types';
+import { Task, Status } from '../../types';
 
 const TasksList: React.FC = () => {
   const dispatch = useAppDispatch();
