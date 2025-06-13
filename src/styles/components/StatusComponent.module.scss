@@ -1,33 +1,23 @@
 @use '../variables' as *;
 
-.backlog,
-.todo,
-.progress,
-.done {
+.open,
+.close {
   color: $c-white;
   font-size: 20px;
   font-weight: bold;
-  padding: 8px;
+  padding: 4px 8px;
+  border-radius: 24px;
   text-align: center;
   text-transform: uppercase;
 }
 
-.backlog {
-  background-color: rgba($c-purple, 0.8);
-  border: 1px solid $c-purple;
-}
 
-.todo {
+.open {
   background-color: rgba($c-yellow, 0.8);
   border: 1px solid $c-yellow;
 }
 
-.progress {
-  background-color: rgba($c-green, 0.8);
-  border: 1px solid $c-green;
-}
-
-.done {
+.close {
   background-color: rgba($c-red, 0.8);
   border: 1px solid $c-red;
 }

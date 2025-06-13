@@ -1,1 +1,8 @@
-export type STATUS = 'BACKLOG' | 'TODO' | 'IN_PROGRESS' | 'DONE';
+export type STATUS = 'OPEN' | 'CLOSE';
+
+export type Task = {
+  id: string;
+  title: string;
+  description: string;
+  status: STATUS;
+};
