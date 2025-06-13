@@ -1,8 +1,14 @@
+import TaskItem from '../../../src/components/task/TaskItem';
 
-export default function SingleTask() {
+interface TaskPageProps {
+  params: { id: string };
+}
+
+export default async function TaskPage({ params }: TaskPageProps) {
+  const { id } = params;
   return (
-    <div className="container mx-auto p-4">
-      <p>Single task</p>
-    </div>
+  <>
+    <TaskItem id={id} />
+  </>
   );
 }
