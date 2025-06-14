@@ -1,22 +1,19 @@
 @use '../variables' as *;
 
 .primary {
-  background-color: rgba($c-green, 0.5);
-  color: $c-white; 
+  background-color: rgba($c-green, 0.5)!important;
   border: 1px solid $c-green;
   border-radius: 4px;
 }
 
 .secondary {
-  background-color: rgba($c-red, 0.5);
-  color: $c-white; 
+  background-color: rgba($c-red, 0.5)!important;
   border: 1px solid $c-red;
   border-radius: 4px;
 }
 
 .tertiary {
-  background-color: rgba($c-blue, 0.5);
-  color: $c-white; 
+  background-color: rgba($c-blue, 0.5)!important;
   border: 1px solid $c-blue;
   border-radius: 4px;
 }
@@ -29,4 +26,5 @@
   cursor: pointer;
   text-transform: uppercase;
   font-weight: bold;
+  color: $c-white; 
 }
