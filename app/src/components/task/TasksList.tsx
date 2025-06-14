@@ -39,22 +39,22 @@ const TasksList: React.FC = () => {
       <h1 className={`font-bold text-2xl mb-2 ${tasks && tasks.length > 0 ? 'mb-2' : 'text-center'}`}>{tasks && tasks.length > 0 ? 'Your tasks:' : 'You don\'t have any tasks!'}</h1>
       { tasks && tasks.length > 0 && <hr /> } 
       {tasks && tasks.length > 0 ? (
-        <table className="min-w-full table-auto border border-gray-300">
-          <thead className="bg-gray-100">
+        <table className="min-w-full table-auto border border-gray-200">
+          <thead className="bg-gray-100 border-b-[1px] border-gray-200">
             <tr>
-              <th className="text-left px-4 py-2 border-b border-gray-300 w-[50%]">Title</th>
-              <th className="text-left px-4 py-2 border-b border-gray-300 whitespace-nowrap w-[20%]">Status</th>
-              <th className="text-left px-4 py-2 border-b border-gray-300 whitespace-nowrap w-[30%]">Actions</th>
+              <th className="text-center uppercase font-semibold py-2 w-[50%]">Title</th>
+              <th className="text-center uppercase font-semibold py-2 whitespace-nowrap w-[20%]">Status</th>
+              <th className="text-center uppercase font-semibold py-2 whitespace-nowrap w-[30%]">Actions</th>
             </tr>
           </thead>
           <tbody>
             {tasks.map(task => (
-              <tr key={task.id} className="border-t border-gray-200">
-                <td className="px-4 py-2">{task.title}</td>
-                <td className="px-4 py-2">
+              <tr key={task.id} className="border-b-[1px] border-gray-200">
+                <td className="p-2 border-r-[1px] border-gray-100">{task.title}</td>
+                <td className="p-2 border-r-[1px] border-gray-100 text-center">
                   <StatusComponent status={task.status} />
                 </td>
-                <td className="px-4 py-2">
+                <td className="p-2">
                   <div className="flex flex-wrap gap-2">
                     {task.status === Status.OPEN && (
                       <CtaComponent

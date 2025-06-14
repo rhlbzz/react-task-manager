@@ -1,15 +1,20 @@
 import TaskItem from '../../src/components/task/TaskItem';
+import { store } from '../../src/store/store';
 
 interface TaskPageProps {
-  params: Promise<{ id: string }>;
+  params: { id: string };
 }
 
 export async function generateStaticParams() {
-  return [];
+  const tasks = store.getState().tasks.tasks;
+  
+  return tasks.map((task) => ({
+    id: task.id,
+  }));
 }
 
-export default async function TaskPage({ params }: TaskPageProps) {
-  const { id } = await params;
+export default function TaskPage({ params }: TaskPageProps) {
+  const { id } = params;
 
   return (
     <>
