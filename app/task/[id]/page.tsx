@@ -2,7 +2,7 @@ import TaskItem from '../../src/components/task/TaskItem';
 import { store } from '../../src/store/store';
 
 interface TaskPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export async function generateStaticParams() {
@@ -13,8 +13,8 @@ export async function generateStaticParams() {
   }));
 }
 
-export default function TaskPage({ params }: TaskPageProps) {
-  const { id } = params;
+export default async function TaskPage({ params }: TaskPageProps) {
+  const { id } = await params;
 
   return (
     <>

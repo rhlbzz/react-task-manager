@@ -1,10 +1,12 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import StatusComponent from "../ui/StatusComponent";
 import CtaComponent from "../ui/CtaComponent";
 import { useModal } from "../modal/ModalComponent";
 import EditTask from "../form/EditTask";
 import { useAppSelector } from "../../store/hooks";
+import { Task } from "../../types";
 
 interface TaskItemProps {
    id: string
@@ -13,7 +15,24 @@ interface TaskItemProps {
 const TaskItem: React.FC<TaskItemProps> = ({ id }) => {
   const { open } = useModal();
   const tasks = useAppSelector(state => state.tasks.tasks);
-  const task = tasks.find(t => t.id === id);
+  const [task, setTask] = useState<Task | undefined>(undefined);
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+    const foundTask = tasks.find(t => t.id === id);
+    setTask(foundTask);
+  }, [id, tasks]);
+
+  if (!isClient) {
+    return (
+      <div className="container mx-auto p-4">
+        <div className="space-y-4">
+          <h1 className="text-4xl">Loading...</h1>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="container mx-auto p-4">
